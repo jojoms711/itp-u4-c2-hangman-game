@@ -7,7 +7,7 @@ LIST_OF_WORDS = []
 
 def _get_random_word(list_of_words):
     try:
-        return random.choice(list_of_words).lower()
+        return random.choice(list_of_words)
     except:
         raise InvalidListOfWordsException
         
@@ -64,13 +64,13 @@ def guess_letter(game, letter):
         raise GameFinishedException
    
     if letter not in game['masked_word'] :
-        if game['masked_word'] == game['answer_word']: 
+        if game['masked_word'] == game['answer_word'].lower(): 
             raise GameFinishedException
         game['remaining_misses']-=1
    
     game ['previous_guesses'].append(letter)
     if game['remaining_misses'] == 0:
         raise GameLostException
-    if game['masked_word'] == game['answer_word']:        
+    if game['masked_word'] == game['answer_word'].lower():        
         raise GameWonException
 
